@@ -90,21 +90,28 @@ document.addEventListener('DOMContentLoaded', () => {
             siteTitle: "Dinner Recommendation",
             mainHeading: "What to eat for dinner tonight?",
             recommendButton: "Recommend Dinner",
-            themeToggleButton: "Toggle Dark Mode"
+            toggleLightMode: "Toggle Light Mode",
+            toggleDarkMode: "Toggle Dark Mode"
         },
         ko: {
             siteTitle: "저녁 메뉴 추천",
             mainHeading: "오늘 저녁 뭐 먹지?",
             recommendButton: "저녁 메뉴 추천 받기",
-            themeToggleButton: "다크 모드 전환"
+            toggleLightMode: "라이트 모드 전환",
+            toggleDarkMode: "다크 모드 전환"
         }
     };
 
     let currentLanguage = localStorage.getItem('lang-preference') || 'ko'; // Default to Korean
 
-    function setLanguage(lang) {
-        currentLanguage = lang;
-        localStorage.setItem('lang-preference', lang);
+    const LIGHT_THEME_CLASS = 'light-theme';
+    const DARK_THEME_CLASS = 'dark-theme';
+    const THEME_STORAGE_KEY = 'theme-preference';
+    
+    let currentFoodIndex = -1; // To store the index of the currently displayed food
+
+    // Function to update all text content based on current language
+    function applyTranslations() {
         document.querySelectorAll('[data-translate]').forEach(element => {
             const key = element.getAttribute('data-translate');
             if (translations[currentLanguage][key]) {
@@ -115,20 +122,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
-        // Re-render current recommendation to update language
-        generateRecommendation(false); // Pass false to prevent re-generating food
-        updateThemeToggleButtonText(); // Update theme toggle button text on language switch
+        // Update food recommendation text if already displayed
+        if (currentFoodIndex !== -1) {
+            const selectedFood = foodData[currentFoodIndex];
+            foodName.textContent = selectedFood.name[currentLanguage];
+            foodReason.textContent = selectedFood.reason[currentLanguage];
+        }
+        updateThemeToggleButtonText();
     }
 
-    // Initial language setup
-    setLanguage(currentLanguage);
-
-    langKoBtn.addEventListener('click', () => setLanguage('ko'));
-    langEnBtn.addEventListener('click', () => setLanguage('en'));
-
-    // --- Recommendation Logic ---
-    let currentFoodIndex = -1; // To store the index of the currently displayed food
-
+    // Function to generate and display a food recommendation
     function generateRecommendation(newFood = true) {
         let randomIndex;
         if (newFood) {
@@ -137,7 +140,11 @@ document.addEventListener('DOMContentLoaded', () => {
             } while (randomIndex === currentFoodIndex); // Ensure a new food is selected
             currentFoodIndex = randomIndex;
         } else {
-            randomIndex = currentFoodIndex; // If not newFood, display the current one
+            // If not newFood, and no food was previously selected, pick a random one
+            if (currentFoodIndex === -1) {
+                currentFoodIndex = Math.floor(Math.random() * foodData.length);
+            }
+            randomIndex = currentFoodIndex; // Display the current one
         }
         
         const selectedFood = foodData[randomIndex];
@@ -147,58 +154,65 @@ document.addEventListener('DOMContentLoaded', () => {
         foodReason.textContent = selectedFood.reason[currentLanguage];
     }
 
-    if (generateRecommendationBtn) {
-        generateRecommendationBtn.addEventListener('click', () => generateRecommendation(true));
-    }
-    
-    // Initial recommendation on load
-    generateRecommendation(true); // Generate a new food on initial load
-
     // --- Theme Toggling ---
-    const LIGHT_THEME_CLASS = 'light-theme';
-    const DARK_THEME_CLASS = 'dark-theme';
-    const THEME_STORAGE_KEY = 'theme-preference';
-
-    function setInitialTheme() {
-        const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
-        if (savedTheme) {
-            body.classList.add(savedTheme);
+    function updateThemeToggleButtonText() {
+        if (body.classList.contains(DARK_THEME_CLASS)) {
+            themeToggleBtn.textContent = translations[currentLanguage].toggleLightMode;
         } else {
-            // Default to light theme if no preference is saved
+            themeToggleBtn.textContent = translations[currentLanguage].toggleDarkMode;
+        }
+    }
+
+    function toggleTheme() {
+        if (body.classList.contains(LIGHT_THEME_CLASS)) {
+            body.classList.remove(LIGHT_THEME_CLASS);
+            body.classList.add(DARK_THEME_CLASS);
+            localStorage.setItem(THEME_STORAGE_KEY, DARK_THEME_CLASS);
+        } else if (body.classList.contains(DARK_THEME_CLASS)) {
+            body.classList.remove(DARK_THEME_CLASS);
             body.classList.add(LIGHT_THEME_CLASS);
             localStorage.setItem(THEME_STORAGE_KEY, LIGHT_THEME_CLASS);
+        } else { // Handle case where no theme class is present (e.g., first load)
+            body.classList.add(DARK_THEME_CLASS);
+            localStorage.setItem(THEME_STORAGE_KEY, DARK_THEME_CLASS);
         }
         updateThemeToggleButtonText();
     }
 
-    function updateThemeToggleButtonText() {
-        if (body.classList.contains(DARK_THEME_CLASS)) {
-            themeToggleBtn.textContent = currentLanguage === 'ko' ? '라이트 모드 전환' : 'Toggle Light Mode';
+    function setInitialTheme() {
+        const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+        if (savedTheme === DARK_THEME_CLASS) {
+            body.classList.add(DARK_THEME_CLASS);
         } else {
-            themeToggleBtn.textContent = currentLanguage === 'ko' ? '다크 모드 전환' : 'Toggle Dark Mode';
+            // Default to light theme if no preference is saved or saved theme is light
+            body.classList.add(LIGHT_THEME_CLASS);
+            localStorage.setItem(THEME_STORAGE_KEY, LIGHT_THEME_CLASS);
         }
+    }
+
+    // --- Event Listeners ---
+    langKoBtn.addEventListener('click', () => {
+        currentLanguage = 'ko';
+        localStorage.setItem('lang-preference', 'ko');
+        applyTranslations();
+    });
+
+    langEnBtn.addEventListener('click', () => {
+        currentLanguage = 'en';
+        localStorage.setItem('lang-preference', 'en');
+        applyTranslations();
+    });
+
+    if (generateRecommendationBtn) {
+        generateRecommendationBtn.addEventListener('click', () => generateRecommendation(true));
     }
 
     if (themeToggleBtn) {
         themeToggleBtn.addEventListener('click', toggleTheme);
     }
 
-    function toggleTheme() {
-        if (body.classList.contains(LIGHT_THEME_CLASS)) {
-            body.classList.replace(LIGHT_THEME_CLASS, DARK_THEME_CLASS);
-            localStorage.setItem(THEME_STORAGE_KEY, DARK_THEME_CLASS);
-        } else {
-            body.classList.replace(DARK_THEME_CLASS, LIGHT_THEME_CLASS);
-            localStorage.setItem(THEME_STORAGE_KEY, LIGHT_THEME_CLASS);
-        }
-        updateThemeToggleButtonText();
-    }
-
-    // Set theme on page load
-    setInitialTheme();
-    
-    // Ensure theme toggle button text is correct on language switch
-    document.querySelectorAll('.lang-button').forEach(button => {
-        button.addEventListener('click', updateThemeToggleButtonText);
-    });
+    // --- Initial Setup ---
+    setInitialTheme(); // Set theme first so updateThemeToggleButtonText works correctly
+    applyTranslations(); // Apply translations based on initial language
+    generateRecommendation(true); // Generate initial food recommendation
 });
