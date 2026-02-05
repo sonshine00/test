@@ -91,14 +91,16 @@ document.addEventListener('DOMContentLoaded', () => {
             mainHeading: "What to eat for dinner tonight?",
             recommendButton: "Recommend Dinner",
             toggleLightMode: "Toggle Light Mode",
-            toggleDarkMode: "Toggle Dark Mode"
+            toggleDarkMode: "Toggle Dark Mode",
+            partnershipInquiry: "Partnership Inquiry"
         },
         ko: {
             siteTitle: "저녁 메뉴 추천",
             mainHeading: "오늘 저녁 뭐 먹지?",
             recommendButton: "저녁 메뉴 추천 받기",
             toggleLightMode: "라이트 모드 전환",
-            toggleDarkMode: "다크 모드 전환"
+            toggleDarkMode: "다크 모드 전환",
+            partnershipInquiry: "제휴 문의"
         }
     };
 
