@@ -38,18 +38,7 @@ const TestSelection = () => {
 
       <section className="ad-slot middle" aria-label="Advertisement"></section>
 
-      {/* Prominent navigation for About and Inquiry as requested */}
-      <div className="legal-buttons-grid" style={{ width: '100%', marginTop: '2rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        <button className="secondary-button" onClick={() => navigate(`/${lang}/about`)}>
-          ✨ {texts.aboutUs}
-        </button>
-        <button className="secondary-button" onClick={() => navigate(`/${lang}/contact`)}>
-          📩 {texts.partnershipInquiry}
-        </button>
-        <button className="secondary-button" onClick={() => navigate(`/${lang}/privacy`)}>
-          🔒 {texts.privacyPolicy}
-        </button>
-      </div>
+      {/* Redundant navigation buttons removed as they are present in the global footer */}
 
       <section className="ad-slot bottom" aria-label="Advertisement"></section>
     </div>
