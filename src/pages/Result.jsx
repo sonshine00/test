@@ -100,6 +100,15 @@ const Result = () => {
         identifier={disqusIdentifier} 
         title={`${resultData.type} - ${testId}`} 
       />
+
+      <div className="viral-loop-cta" style={{ marginTop: '3rem', textAlign: 'center' }}>
+        <p style={{ color: 'var(--description-color)', marginBottom: '1rem' }}>
+          ✨ {texts.tryAgainAndShare}
+        </p>
+        <button className="primary-button" onClick={() => navigate(`/${lang}`)}>
+          📋 {texts.tryAnotherTest}
+        </button>
+      </div>
     </div>
   );
 };
