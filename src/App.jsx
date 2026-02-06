@@ -19,15 +19,9 @@ function App() {
       <Routes>
         <Route path="/" element={<LanguageRedirect />} />
         
-        {/* English Routes */}
-        <Route path="/en" element={<Home />} />
-        <Route path="/en/test" element={<Test />} />
-        <Route path="/en/result" element={<Result />} />
-        
-        {/* Korean Routes */}
-        <Route path="/ko" element={<Home />} />
-        <Route path="/ko/test" element={<Test />} />
-        <Route path="/ko/result" element={<Result />} />
+        <Route path="/:lang" element={<Home />} />
+        <Route path="/:lang/test" element={<Test />} />
+        <Route path="/:lang/result" element={<Result />} />
 
         {/* Fallback */}
         <Route path="*" element={<Navigate to="/en" replace />} />
