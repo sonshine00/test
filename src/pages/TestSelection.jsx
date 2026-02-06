@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { tests } from '../data/tests';
 import { i18n } from '../data/i18n';
 import { useMeta } from '../hooks/useMeta';
+import ContactForm from '../components/ContactForm';
 
 const TestSelection = () => {
   const { lang } = useParams();
@@ -26,6 +27,10 @@ const TestSelection = () => {
             <button className="secondary-button">{texts.startTest}</button>
           </div>
         ))}
+      </div>
+      
+      <div style={{ marginTop: '4rem', width: '100%' }}>
+        <ContactForm />
       </div>
     </div>
   );
