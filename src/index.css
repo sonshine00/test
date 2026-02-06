@@ -218,6 +218,34 @@ h1.title {
   box-sizing: border-box;
 }
 
+.clickable {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.clickable:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+.test-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.test-card h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+}
+
+.test-card p {
+  color: var(--description-color);
+  margin-bottom: 1.5rem;
+}
+
 .why-section {
   margin-top: 2rem;
   padding-top: 1.5rem;

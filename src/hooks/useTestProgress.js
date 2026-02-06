@@ -1,21 +1,19 @@
 import { useState, useEffect } from 'react';
 
-const STORAGE_KEY = 'avoider_test_progress';
+export const useTestProgress = (key) => {
+  const storageKey = `test_progress_${key}`;
 
-export const useTestProgress = (lang) => {
   const [progress, setProgress] = useState(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
+    const saved = localStorage.getItem(storageKey);
     if (saved) {
-      const parsed = JSON.parse(saved);
-      // Only restore if language matches or we don't care about language mismatch
-      return parsed;
+      return JSON.parse(saved);
     }
     return { currentIndex: 0, score: 0, answers: [] };
   });
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
-  }, [progress]);
+    localStorage.setItem(storageKey, JSON.stringify(progress));
+  }, [progress, storageKey]);
 
   const updateProgress = (points, answer) => {
     setProgress(prev => ({
@@ -28,7 +26,7 @@ export const useTestProgress = (lang) => {
   const resetProgress = () => {
     const fresh = { currentIndex: 0, score: 0, answers: [] };
     setProgress(fresh);
-    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(storageKey);
   };
 
   return { progress, updateProgress, resetProgress };

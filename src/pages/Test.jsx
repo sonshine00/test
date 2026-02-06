@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { questions } from '../data/questions';
 import ProgressBar from '../components/ProgressBar';
@@ -6,11 +6,15 @@ import { useTestProgress } from '../hooks/useTestProgress';
 import { useMeta } from '../hooks/useMeta';
 
 const Test = () => {
-  const { lang } = useParams();
+  const { lang, testId } = useParams();
   const navigate = useNavigate();
-  const currentQuestions = questions[lang] || questions.en;
   
-  const { progress, updateProgress, resetProgress } = useTestProgress(lang);
+  // Fetch questions for specific test
+  const testQuestions = questions[testId];
+  const currentQuestions = testQuestions ? (testQuestions[lang] || testQuestions.en) : [];
+  
+  // useTestProgress might need update to be test-specific
+  const { progress, updateProgress, resetProgress } = useTestProgress(`${testId}_${lang}`);
   const { currentIndex, score } = progress;
   
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -20,23 +24,21 @@ const Test = () => {
   const handleAnswer = (points) => {
     setIsTransitioning(true);
     
-    // Small delay for transition effect
     setTimeout(() => {
       const nextIndex = currentIndex + 1;
       const nextScore = score + points;
 
       if (nextIndex < currentQuestions.length) {
-        updateProgress(points, points); // Saving score as answer for simplicity
+        updateProgress(points, points);
         setIsTransitioning(false);
       } else {
-        // Clear progress when finished
         resetProgress();
-        navigate(`/${lang}/result`, { state: { score: nextScore } });
+        navigate(`/${lang}/${testId}/result`, { state: { score: nextScore } });
       }
     }, 300);
   };
 
-  if (currentIndex >= currentQuestions.length) return null;
+  if (!currentQuestions.length || currentIndex >= currentQuestions.length) return null;
 
   const currentQuestion = currentQuestions[currentIndex];
 

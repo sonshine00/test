@@ -9,11 +9,11 @@ export const useMeta = (lang, page = 'home', extraData = {}) => {
     document.documentElement.lang = lang;
 
     // Determine title and description
-    let title = texts.title;
-    let description = texts.description;
+    let title = extraData.title || texts.title;
+    let description = extraData.description || texts.description;
 
     if (page === 'result' && extraData.type) {
-      title = `${extraData.type} - ${texts.title}`;
+      title = `${extraData.type} - ${title}`;
     }
 
     document.title = title;

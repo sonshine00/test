@@ -6,29 +6,31 @@ import ShareButton from '../components/ShareButton';
 import { useMeta } from '../hooks/useMeta';
 
 const Result = () => {
-  const { lang } = useParams();
+  const { lang, testId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const texts = i18n[lang] || i18n.en;
   
   const score = location.state?.score ?? 0;
-  const resultData = (results[lang] || results.en).find(
+  
+  const testResults = results[testId];
+  const resultData = testResults ? (testResults[lang] || testResults.en).find(
     (r) => score >= r.min && score <= r.max
-  );
+  ) : null;
 
   // SEO
   useMeta(lang || 'en', 'result', { type: resultData?.type });
 
   useEffect(() => {
     if (location.state?.score === undefined) {
-      navigate(`/${lang}`);
+      navigate(`/${lang}/${testId}`);
     }
-  }, [location.state, navigate, lang]);
+  }, [location.state, navigate, lang, testId]);
 
   if (!resultData) return <div className="container">{texts.loading}</div>;
 
   const handleOtherLang = () => {
-    navigate(`/${texts.otherLangCode}`);
+    navigate(`/${texts.otherLangCode}/${testId}`);
   };
 
   return (
@@ -51,8 +53,11 @@ const Result = () => {
         <h3>{texts.ctaTitle}</h3>
         <div className="actions">
           <ShareButton lang={lang} resultType={resultData.type} />
-          <button className="secondary-button" onClick={() => navigate(`/${lang}`)}>
+          <button className="secondary-button" onClick={() => navigate(`/${lang}/${testId}`)}>
             🔄 {texts.tryAgain}
+          </button>
+          <button className="secondary-button" onClick={() => navigate(`/${lang}`)}>
+            📋 {texts.tryAnotherTest}
           </button>
           <button className="text-button" onClick={handleOtherLang}>
             🌐 {texts.tryOtherLang}

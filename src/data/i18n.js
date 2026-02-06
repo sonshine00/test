@@ -14,7 +14,10 @@ export const i18n = {
     ctaTitle: "Want to know more?",
     tryOtherLang: "Try in Korean",
     otherLangCode: "ko",
-    shareMessage: (type) => `I'm a "${type}"! Find out what kind of avoider you are: `
+    shareMessage: (type) => `I'm a "${type}"! Find out what kind of avoider you are: `,
+    selectTest: "Select a Test",
+    backToList: "Back to List",
+    tryAnotherTest: "Try Another Test",
   },
   ko: {
     title: "당신은 어떤 유형의 회피자인가요?",
@@ -31,6 +34,9 @@ export const i18n = {
     ctaTitle: "더 알고 싶으신가요?",
     tryOtherLang: "영어 버전으로 해보기",
     otherLangCode: "en",
-    shareMessage: (type) => `나는 "${type}" 유형! 당신은 어떤 회피자인지 확인해보세요: `
+    shareMessage: (type) => `나는 "${type}" 유형! 당신은 어떤 회피자인지 확인해보세요: `,
+    selectTest: "테스트 선택하기",
+    backToList: "목록으로 돌아가기",
+    tryAnotherTest: "다른 테스트 해보기",
   },
 };

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import TestSelection from './pages/TestSelection';
 import Home from './pages/Home';
 import Test from './pages/Test';
 import Result from './pages/Result';
@@ -32,9 +33,13 @@ function App() {
       <Routes>
         <Route path="/" element={<LanguageRedirect />} />
         
-        <Route path="/:lang" element={<Home />} />
-        <Route path="/:lang/test" element={<Test />} />
-        <Route path="/:lang/result" element={<Result />} />
+        {/* Test List */}
+        <Route path="/:lang" element={<TestSelection />} />
+        
+        {/* Specific Test Routes */}
+        <Route path="/:lang/:testId" element={<Home />} />
+        <Route path="/:lang/:testId/test" element={<Test />} />
+        <Route path="/:lang/:testId/result" element={<Result />} />
 
         {/* Fallback */}
         <Route path="*" element={<Navigate to="/en" replace />} />
