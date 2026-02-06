@@ -3,6 +3,7 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { results } from '../data/results';
 import { i18n } from '../data/i18n';
 import ShareButton from '../components/ShareButton';
+import DisqusComments from '../components/DisqusComments';
 import { useMeta } from '../hooks/useMeta';
 
 const Result = () => {
@@ -32,6 +33,10 @@ const Result = () => {
   const handleOtherLang = () => {
     navigate(`/${texts.otherLangCode}/${testId}`);
   };
+
+  // Disqus config
+  const disqusUrl = window.location.href;
+  const disqusIdentifier = `${testId}-${resultData.type.replace(/\s+/g, '-').toLowerCase()}`;
 
   return (
     <div className="container result-page fade-in">
@@ -64,6 +69,12 @@ const Result = () => {
           </button>
         </div>
       </div>
+
+      <DisqusComments 
+        url={disqusUrl} 
+        identifier={disqusIdentifier} 
+        title={`${resultData.type} - ${testId}`} 
+      />
     </div>
   );
 };
