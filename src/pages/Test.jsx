@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { i18n } from '../data/i18n';
 import { questions } from '../data/questions';
 import ProgressBar from '../components/ProgressBar';
 import { useTestProgress } from '../hooks/useTestProgress';
