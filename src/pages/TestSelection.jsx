@@ -9,20 +9,40 @@ const TestSelection = () => {
   const navigate = useNavigate();
   const texts = i18n[lang] || i18n.en;
 
+  // WebSite Schema for the main landing page
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Insightful Tests",
+    "url": window.location.origin,
+    "description": texts.aboutDescription,
+    "inLanguage": lang,
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": `${window.location.origin}/#/search?q={search_term_string}`,
+      "query-input": "required name=search_term_string"
+    }
+  };
+
   return (
     <div className="container selection-page fade-in">
-      <SEO lang={lang} />
+      <SEO 
+        lang={lang} 
+        title={texts.title} 
+        description={texts.description}
+        schema={schemaData}
+      />
 
       <section className="ad-slot top" aria-label="Advertisement"></section>
 
-      <div className="selection-header">
+      <header className="selection-header">
         <h1 className="title">{texts.selectTest}</h1>
         <p className="description">{texts.description}</p>
-      </div>
+      </header>
 
-      <div className="test-grid">
+      <nav className="test-grid">
         {Object.values(tests).map((test) => (
-          <div 
+          <article 
             key={test.id} 
             className="test-card highlight-card clickable"
             onClick={() => navigate(`/${lang}/${test.id}`)}
@@ -32,13 +52,19 @@ const TestSelection = () => {
             <div className="card-footer">
               <button className="primary-button">{texts.startTest}</button>
             </div>
-          </div>
+          </article>
         ))}
-      </div>
+      </nav>
 
       <section className="ad-slot middle" aria-label="Advertisement"></section>
 
-      {/* Redundant navigation buttons removed as they are present in the global footer */}
+      {/* GEO-Optimized Site Introduction */}
+      <section className="about-section highlight-card" style={{ marginTop: '2rem', textAlign: 'left' }}>
+        <h2>✨ {texts.aboutUs}</h2>
+        <p style={{ lineHeight: '1.6', color: 'var(--description-color)' }}>
+          {texts.aboutDescription}
+        </p>
+      </section>
 
       <section className="ad-slot bottom" aria-label="Advertisement"></section>
     </div>
