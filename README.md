@@ -1,27 +1,8 @@
-# Dinner Recommendation Website
+# React + Vite
 
-This is a simple web application that recommends dinner menus with explanations and images. It supports both Korean and English languages and includes a dark mode toggle.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Features:
-- Dinner recommendations (Korean, Japanese, Fast Food, Western)
-- Explanations for why each food is a good choice for the day
-- Random food image display
-- Language switching (Korean/English)
-- Dark mode toggle
+Currently, two official plugins are available:
 
-## How to use:
-1. Open `index.html` in your web browser.
-2. Click the "Recommend Dinner" button to get a new recommendation.
-3. Use the language buttons (한국어/English) to switch between languages.
-4. Use the "Toggle Dark Mode" button to change the theme.
-
-## Technologies Used:
-- HTML5
-- CSS3
-- JavaScript
-
-## Image Sources:
-All images are sourced from Unsplash and are free to use.
-
-## Author:
-Gemini CLI
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh

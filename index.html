@@ -1,63 +1,13 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title data-translate="siteTitle">Dinner Recommendation</title>
-  <link href='/style.css' rel='stylesheet'>
-  <meta name="google-adsense-account" content="ca-pub-7277267427602645">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7277267427602645"
-     crossorigin="anonymous"></script>
-</head>
-<body>
-  <div class="container">
-    <div class="header">
-      <h1 data-translate="mainHeading">What to eat for dinner tonight?</h1>
-      <div class="settings-controls">
-        <div class="language-selector">
-          <button id="langKo" class="lang-button" data-lang="ko">한국어</button>
-          <button id="langEn" class="lang-button" data-lang="en">English</button>
-        </div>
-        <button id="themeToggle" data-translate="themeToggleButton">Toggle Dark Mode</button>
-        <a href="contact.html" class="lang-button" data-translate="partnershipInquiry">Partnership Inquiry</a>
-      </div>
-    </div>
-    
-    <div class="recommendation-card">
-      <img id="foodImage" src="https://via.placeholder.com/300x200?text=Food+Image" alt="Recommended Food" class="food-image">
-      <h2 id="foodName" class="food-name"></h2>
-      <p id="foodReason" class="food-reason"></p>
-      <p id="foodDescription" class="food-description"></p>
-    </div>
-
-    <button id="generateRecommendation" data-translate="recommendButton">Recommend Dinner</button>
-
-    <div id="disqus_thread" style="margin-top: 20px;"></div>
-    <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        var disqus_config = function () {
-        this.page.url = window.location.href;  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'dinner-recommendation-homepage'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        };
-        (function() { // DON'T EDIT BELOW THIS LINE
-        var d = document, s = d.createElement('script');
-        s.src = 'https://moneymany.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  </div>
-  <footer>
-    <p>&copy; 2024 Dinner Recommendation. All rights reserved.</p>
-    <p>
-      <a href="about.html" data-translate="aboutUsLink">About Us</a> |
-      <a href="privacy.html" data-translate="privacyPolicyLink">Privacy Policy</a> |
-      <a href="terms.html" data-translate="termsOfServiceLink">Terms of Service</a>
-    </p>
-  </footer>
-  <script defer type="text/javascript" src="/main.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>What Kind of Avoider Are You?</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>

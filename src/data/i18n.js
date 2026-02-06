@@ -1,0 +1,26 @@
+export const i18n = {
+  en: {
+    title: "What Kind of Avoider Are You?",
+    description: "Take this 30-second personality test to find out your avoidance style.",
+    startTest: "Start Test",
+    next: "Next",
+    resultTitle: "Your Result",
+    tryAgain: "Try Again",
+    share: "Share Result",
+    copied: "Copied to clipboard!",
+    loading: "Loading...",
+    questionCount: "Question",
+  },
+  ko: {
+    title: "당신은 어떤 유형의 회피자인가요?",
+    description: "30초 성격 테스트를 통해 당신의 회피 스타일을 알아보세요.",
+    startTest: "테스트 시작하기",
+    next: "다음",
+    resultTitle: "테스트 결과",
+    tryAgain: "다시 하기",
+    share: "결과 공유하기",
+    copied: "클립보드에 복사되었습니다!",
+    loading: "로딩 중...",
+    questionCount: "질문",
+  },
+};
