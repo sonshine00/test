@@ -18,6 +18,7 @@ export const i18n = {
     selectTest: "Select a Test",
     backToList: "Back to List",
     tryAnotherTest: "Try Another Test",
+    partnershipInquiry: "Partnership Inquiry",
   },
   ko: {
     title: "당신은 어떤 유형의 회피자인가요?",
@@ -38,5 +39,6 @@ export const i18n = {
     selectTest: "테스트 선택하기",
     backToList: "목록으로 돌아가기",
     tryAnotherTest: "다른 테스트 해보기",
+    partnershipInquiry: "제휴 문의",
   },
 };

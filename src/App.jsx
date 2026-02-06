@@ -4,6 +4,7 @@ import TestSelection from './pages/TestSelection';
 import Home from './pages/Home';
 import Test from './pages/Test';
 import Result from './pages/Result';
+import Contact from './pages/Contact';
 import HeaderControls from './components/HeaderControls';
 import './index.css';
 
@@ -35,6 +36,9 @@ function App() {
         
         {/* Test List */}
         <Route path="/:lang" element={<TestSelection />} />
+        
+        {/* Contact Page */}
+        <Route path="/:lang/contact" element={<Contact />} />
         
         {/* Specific Test Routes */}
         <Route path="/:lang/:testId" element={<Home />} />
