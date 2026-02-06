@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Test from './pages/Test';
 import Result from './pages/Result';
@@ -11,7 +11,7 @@ const LanguageRedirect = () => {
   const defaultLang = supportedLangs.includes(browserLang) ? browserLang : 'en';
   
   return <Navigate to={`/${defaultLang}`} replace />;
-};
+}
 
 function App() {
   return (
