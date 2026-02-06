@@ -10,7 +10,7 @@ const Footer = () => {
   return (
     <footer className="global-footer">
       <div className="footer-links">
-        <Link to={`/${currentLang}`}>{texts.aboutUs}</Link>
+        <Link to={`/${currentLang}/about`}>{texts.aboutUs}</Link>
         <Link to={`/${currentLang}/contact`}>{texts.partnershipInquiry}</Link>
         <Link to={`/${currentLang}/privacy`}>{texts.privacyPolicy}</Link>
         <Link to={`/${currentLang}/terms`}>{texts.termsOfService}</Link>

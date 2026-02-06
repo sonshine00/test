@@ -5,6 +5,7 @@ import { tests } from '../data/tests';
 import { i18n } from '../data/i18n';
 import ShareButton from '../components/ShareButton';
 import SEO from '../components/SEO';
+import DisqusComments from '../components/DisqusComments';
 
 const Result = () => {
   const { lang, testId } = useParams();
@@ -33,6 +34,10 @@ const Result = () => {
   }, [testId]);
 
   if (!resultData) return <div className="container">{texts.loading}</div>;
+
+  // Disqus config
+  const disqusUrl = window.location.href;
+  const disqusIdentifier = `${testId}-${resultData.type.replace(/\s+/g, '-').toLowerCase()}`;
 
   return (
     <div className="container result-page fade-in">
@@ -64,6 +69,9 @@ const Result = () => {
           <button className="secondary-button" onClick={() => navigate(`/${lang}/${testId}`)}>
             🔄 {texts.tryAgain}
           </button>
+          <button className="secondary-button" onClick={() => navigate(`/${lang}`)}>
+            🏠 {texts.backToList}
+          </button>
         </div>
       </div>
 
@@ -86,6 +94,12 @@ const Result = () => {
       </div>
 
       <section className="ad-slot bottom" aria-label="Advertisement"></section>
+
+      <DisqusComments 
+        url={disqusUrl} 
+        identifier={disqusIdentifier} 
+        title={`${resultData.type} - ${testId}`} 
+      />
     </div>
   );
 };

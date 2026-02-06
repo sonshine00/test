@@ -13,6 +13,7 @@ const Result = lazy(() => import('./pages/Result'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Privacy = lazy(() => import('./pages/Privacy'));
 const Terms = lazy(() => import('./pages/Terms'));
+const About = lazy(() => import('./pages/About'));
 
 const LanguageRedirect = () => {
   const browserLang = navigator.language.split('-')[0];
@@ -52,11 +53,11 @@ function App() {
               {/* Test List */}
               <Route path="/:lang" element={<TestSelection />} />
               
-              {/* Legal and Contact Pages */}
-              <Route path="/:lang/contact" element={<Contact />} />
-              <Route path="/:lang/privacy" element={<Privacy />} />
-              <Route path="/:lang/terms" element={<Terms />} />
-              
+                        {/* Legal and Contact Pages */}
+                        <Route path="/:lang/contact" element={<Contact />} />
+                        <Route path="/:lang/privacy" element={<Privacy />} />
+                        <Route path="/:lang/terms" element={<Terms />} />
+                        <Route path="/:lang/about" element={<About />} />              
               {/* Specific Test Routes */}
               <Route path="/:lang/:testId" element={<Home />} />
               <Route path="/:lang/:testId/test" element={<Test />} />

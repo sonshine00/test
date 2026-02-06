@@ -3,7 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { tests } from '../data/tests';
 import { i18n } from '../data/i18n';
 import SEO from '../components/SEO';
-import ContactForm from '../components/ContactForm';
 
 const TestSelection = () => {
   const { lang } = useParams();
@@ -39,21 +38,20 @@ const TestSelection = () => {
 
       <section className="ad-slot middle" aria-label="Advertisement"></section>
 
-      <div className="about-section highlight-card">
-        <h3>✨ {texts.aboutUs}</h3>
-        <p>{texts.aboutDescription}</p>
+      {/* Prominent navigation for About and Inquiry as requested */}
+      <div className="legal-buttons-grid" style={{ width: '100%', marginTop: '2rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <button className="secondary-button" onClick={() => navigate(`/${lang}/about`)}>
+          ✨ {texts.aboutUs}
+        </button>
+        <button className="secondary-button" onClick={() => navigate(`/${lang}/contact`)}>
+          📩 {texts.partnershipInquiry}
+        </button>
+        <button className="secondary-button" onClick={() => navigate(`/${lang}/privacy`)}>
+          🔒 {texts.privacyPolicy}
+        </button>
       </div>
 
       <section className="ad-slot bottom" aria-label="Advertisement"></section>
-
-      <div className="footer-actions">
-        <button 
-          className="text-button" 
-          onClick={() => navigate(`/${lang}/contact`)}
-        >
-          📩 {texts.partnershipInquiry}
-        </button>
-      </div>
     </div>
   );
 };
