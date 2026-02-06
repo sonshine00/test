@@ -1,7 +1,6 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { i18n } from '../data/i18n';
-import LanguageToggle from '../components/LanguageToggle';
 
 const Home = () => {
   const { lang } = useParams();
@@ -14,7 +13,6 @@ const Home = () => {
 
   return (
     <div className="container home-page">
-      <LanguageToggle currentLang={lang} />
       <h1 className="title">{texts.title}</h1>
       <p className="description">{texts.description}</p>
       <button className="primary-button" onClick={startTest}>

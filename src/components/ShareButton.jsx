@@ -3,7 +3,7 @@ import { i18n } from '../data/i18n';
 
 const ShareButton = ({ lang }) => {
   const [copied, setCopied] = useState(false);
-  const texts = i18n[lang];
+  const texts = i18n[lang] || i18n.en;
 
   const handleShare = () => {
     const url = window.location.href;
