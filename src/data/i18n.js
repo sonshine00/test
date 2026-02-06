@@ -23,7 +23,7 @@ export const i18n = {
     aboutUs: "About Us",
     footerText: "© 2026 Insightful Tests. All rights reserved.",
     aboutDescription: "We provide high-quality, engaging personality tests designed to help you understand your behavior and vibes in various situations.",
-    shareTemplate: (type, url) => `My result is '${type}'! 🌈\nTry yours here:\n${url}`,
+    shareTemplate: (type, url) => `✨ My result is '${type}'! ✨\nThink you can beat my vibe? 🌈\nTry the test here: ${url} #PersonalityTest #Psychology`,
   },
   ko: {
     title: "통찰력 있는 성격 테스트",
@@ -49,6 +49,6 @@ export const i18n = {
     aboutUs: "서비스 소개",
     footerText: "© 2026 Insightful Tests. 모든 권리 보유.",
     aboutDescription: "우리는 다양한 상황에서의 행동과 분위기를 이해하는 데 도움이 되는 고품질 성격 테스트를 제공합니다.",
-    shareTemplate: (type, url) => `내 결과는 '${type}'! 🌈\n너도 해보기 👉\n${url}`,
+    shareTemplate: (type, url) => `✨ 내 결과는 '${type}'! ✨\n너는 어떤 유형인지 확인해봐! 🌈\n테스트 하러가기 👉 ${url} #성격테스트 #심리테스트 #MBTI`,
   },
 };

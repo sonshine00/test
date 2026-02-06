@@ -436,6 +436,68 @@ h1.title {
   margin-bottom: 2rem;
 }
 
+/* Share Buttons Grid */
+.share-container {
+  width: 100%;
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.share-title {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--description-color);
+}
+
+.share-buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  width: 100%;
+}
+
+.share-icon-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.share-icon-button svg {
+  width: 24px;
+  height: 24px;
+}
+
+.share-icon-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.share-icon-button.twitter:hover {
+  color: #1DA1F2;
+  border-color: #1DA1F2;
+}
+
+.share-icon-button.facebook:hover {
+  color: #1877F2;
+  border-color: #1877F2;
+}
+
+.share-icon-button.copy:hover {
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
 .why-section {
   margin-top: 2rem;
   padding-top: 1.5rem;
