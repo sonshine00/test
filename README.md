@@ -1,8 +1,20 @@
-# React + Vite
+# Insightful Personality Tests
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A high-quality, multi-language personality test platform built with React and Vite.
 
-Currently, two official plugins are available:
+## Features
+- **Diverse Tests**: Includes "What Kind of Avoider Are You?" and "K-pop Idol Vibe Test".
+- **Multi-language**: Full support for English and Korean.
+- **Privacy First**: No personal data collection, respects user privacy.
+- **SEO Optimized**: Dynamic meta tags and clean URL structure.
+- **Responsive Design**: Mobile-first approach for all devices.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
+- React + Vite
+- React Router (HashRouter for static hosting)
+- CSS Variables for Theme Management
+- Disqus Integration for Community Engagement
+- Formspree for Partnership Inquiries
+
+## License
+© 2026 Insightful Tests. All rights reserved.

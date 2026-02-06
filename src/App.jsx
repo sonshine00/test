@@ -5,7 +5,10 @@ import Home from './pages/Home';
 import Test from './pages/Test';
 import Result from './pages/Result';
 import Contact from './pages/Contact';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
 import HeaderControls from './components/HeaderControls';
+import Footer from './components/Footer';
 import './index.css';
 
 const LanguageRedirect = () => {
@@ -31,23 +34,28 @@ function App() {
   return (
     <Router>
       <HeaderControls theme={theme} setTheme={setTheme} />
-      <Routes>
-        <Route path="/" element={<LanguageRedirect />} />
-        
-        {/* Test List */}
-        <Route path="/:lang" element={<TestSelection />} />
-        
-        {/* Contact Page */}
-        <Route path="/:lang/contact" element={<Contact />} />
-        
-        {/* Specific Test Routes */}
-        <Route path="/:lang/:testId" element={<Home />} />
-        <Route path="/:lang/:testId/test" element={<Test />} />
-        <Route path="/:lang/:testId/result" element={<Result />} />
+      <div className="main-content">
+        <Routes>
+          <Route path="/" element={<LanguageRedirect />} />
+          
+          {/* Test List */}
+          <Route path="/:lang" element={<TestSelection />} />
+          
+          {/* Legal and Contact Pages */}
+          <Route path="/:lang/contact" element={<Contact />} />
+          <Route path="/:lang/privacy" element={<Privacy />} />
+          <Route path="/:lang/terms" element={<Terms />} />
+          
+          {/* Specific Test Routes */}
+          <Route path="/:lang/:testId" element={<Home />} />
+          <Route path="/:lang/:testId/test" element={<Test />} />
+          <Route path="/:lang/:testId/result" element={<Result />} />
 
-        {/* Fallback */}
-        <Route path="*" element={<Navigate to="/en" replace />} />
-      </Routes>
+          {/* Fallback */}
+          <Route path="*" element={<Navigate to="/en" replace />} />
+        </Routes>
+      </div>
+      <Footer />
     </Router>
   );
 }

@@ -309,6 +309,57 @@ h1.title {
   color: #f44336;
 }
 
+/* Legal & Footer Styles */
+.legal-content h3 {
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  color: var(--accent-color);
+}
+
+.legal-content p {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.global-footer {
+  margin-top: 4rem;
+  padding: 2rem 1rem;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.footer-links a {
+  color: var(--description-color);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--accent-color);
+}
+
+.footer-copy {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.main-content {
+  min-height: 70vh;
+}
+
+.selection-header {
+  margin-bottom: 2rem;
+}
+
 .why-section {
   margin-top: 2rem;
   padding-top: 1.5rem;

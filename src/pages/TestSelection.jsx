@@ -13,7 +13,11 @@ const TestSelection = () => {
 
   return (
     <div className="container selection-page fade-in">
-      <h1 className="title">{texts.selectTest}</h1>
+      <div className="selection-header">
+        <h1 className="title">{texts.selectTest}</h1>
+        <p className="description">{texts.description}</p>
+      </div>
+
       <div className="test-grid">
         {Object.values(tests).map((test) => (
           <div 
@@ -27,15 +31,12 @@ const TestSelection = () => {
           </div>
         ))}
       </div>
-      
-      <div className="footer-actions" style={{ marginTop: '4rem', width: '100%' }}>
-        <button 
-          className="text-button" 
-          onClick={() => navigate(`/${lang}/contact`)}
-          style={{ textDecoration: 'underline' }}
-        >
-          📩 {texts.partnershipInquiry}
-        </button>
+
+      <div className="about-section highlight-card" style={{ marginTop: '4rem', textAlign: 'left' }}>
+        <h3>✨ {texts.aboutUs}</h3>
+        <p style={{ lineHeight: '1.6', color: 'var(--description-color)' }}>
+          {texts.aboutDescription}
+        </p>
       </div>
     </div>
   );
