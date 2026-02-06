@@ -309,6 +309,82 @@ h1.title {
   color: #f44336;
 }
 
+/* Ad Slots */
+.ad-slot {
+  width: 100%;
+  min-height: 100px;
+  background-color: var(--progress-bg);
+  margin: 2rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ad-slot::after {
+  content: 'Advertisement';
+  font-size: 0.7rem;
+  color: var(--description-color);
+  opacity: 0.5;
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--accent-color);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 1000;
+  font-weight: 600;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--progress-bg);
+  border-top: 4px solid var(--accent-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Cards */
+.small-card {
+  padding: 1.5rem !important;
+}
+
+.small-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.card-footer {
+  margin-top: auto;
+  width: 100%;
+}
+
+.other-tests-section {
+  width: 100%;
+  margin-top: 3rem;
+  text-align: left;
+}
+
+.other-tests-section h3 {
+  margin-bottom: 1.5rem;
+}
+
 /* Legal & Footer Styles */
 .legal-content h3 {
   margin-top: 1.5rem;

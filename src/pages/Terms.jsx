@@ -1,14 +1,12 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { i18n } from '../data/i18n';
-import { useMeta } from '../hooks/useMeta';
+import SEO from '../components/SEO';
 
 const Terms = () => {
   const { lang } = useParams();
   const navigate = useNavigate();
   const texts = i18n[lang] || i18n.en;
-
-  useMeta(lang || 'en', 'terms', { title: texts.termsOfService });
 
   const content = {
     en: {
@@ -27,6 +25,7 @@ const Terms = () => {
 
   return (
     <div className="container legal-page fade-in">
+      <SEO lang={lang} title={texts.termsOfService} />
       <h1 className="title">{texts.termsOfService}</h1>
       <div className="legal-content highlight-card" style={{ textAlign: 'left' }}>
         <h3>1. {lang === 'ko' ? '이용 조건' : 'Usage Terms'}</h3>

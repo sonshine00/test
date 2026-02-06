@@ -1,14 +1,12 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { i18n } from '../data/i18n';
-import { useMeta } from '../hooks/useMeta';
+import SEO from '../components/SEO';
 
 const Privacy = () => {
   const { lang } = useParams();
   const navigate = useNavigate();
   const texts = i18n[lang] || i18n.en;
-
-  useMeta(lang || 'en', 'privacy', { title: texts.privacyPolicy });
 
   const content = {
     en: {
@@ -29,6 +27,7 @@ const Privacy = () => {
 
   return (
     <div className="container legal-page fade-in">
+      <SEO lang={lang} title={texts.privacyPolicy} />
       <h1 className="title">{texts.privacyPolicy}</h1>
       <div className="legal-content highlight-card" style={{ textAlign: 'left' }}>
         <p>{c.intro}</p>

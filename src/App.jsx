@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import TestSelection from './pages/TestSelection';
-import Home from './pages/Home';
-import Test from './pages/Test';
-import Result from './pages/Result';
-import Contact from './pages/Contact';
-import Privacy from './pages/Privacy';
-import Terms from './pages/Terms';
+import { HelmetProvider } from 'react-helmet-async';
 import HeaderControls from './components/HeaderControls';
 import Footer from './components/Footer';
 import './index.css';
+
+// Lazy load pages for performance
+const TestSelection = lazy(() => import('./pages/TestSelection'));
+const Home = lazy(() => import('./pages/Home'));
+const Test = lazy(() => import('./pages/Test'));
+const Result = lazy(() => import('./pages/Result'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Privacy = lazy(() => import('./pages/Privacy'));
+const Terms = lazy(() => import('./pages/Terms'));
 
 const LanguageRedirect = () => {
   const browserLang = navigator.language.split('-')[0];
@@ -18,6 +21,12 @@ const LanguageRedirect = () => {
   
   return <Navigate to={`/${defaultLang}`} replace />;
 }
+
+const Loading = () => (
+  <div className="container">
+    <div className="loading-spinner"></div>
+  </div>
+);
 
 function App() {
   const [theme, setTheme] = useState(() => {
@@ -32,31 +41,35 @@ function App() {
   }, [theme]);
 
   return (
-    <Router>
-      <HeaderControls theme={theme} setTheme={setTheme} />
-      <div className="main-content">
-        <Routes>
-          <Route path="/" element={<LanguageRedirect />} />
-          
-          {/* Test List */}
-          <Route path="/:lang" element={<TestSelection />} />
-          
-          {/* Legal and Contact Pages */}
-          <Route path="/:lang/contact" element={<Contact />} />
-          <Route path="/:lang/privacy" element={<Privacy />} />
-          <Route path="/:lang/terms" element={<Terms />} />
-          
-          {/* Specific Test Routes */}
-          <Route path="/:lang/:testId" element={<Home />} />
-          <Route path="/:lang/:testId/test" element={<Test />} />
-          <Route path="/:lang/:testId/result" element={<Result />} />
+    <HelmetProvider>
+      <Router>
+        <HeaderControls theme={theme} setTheme={setTheme} />
+        <div className="main-content">
+          <Suspense fallback={<Loading />}>
+            <Routes>
+              <Route path="/" element={<LanguageRedirect />} />
+              
+              {/* Test List */}
+              <Route path="/:lang" element={<TestSelection />} />
+              
+              {/* Legal and Contact Pages */}
+              <Route path="/:lang/contact" element={<Contact />} />
+              <Route path="/:lang/privacy" element={<Privacy />} />
+              <Route path="/:lang/terms" element={<Terms />} />
+              
+              {/* Specific Test Routes */}
+              <Route path="/:lang/:testId" element={<Home />} />
+              <Route path="/:lang/:testId/test" element={<Test />} />
+              <Route path="/:lang/:testId/result" element={<Result />} />
 
-          {/* Fallback */}
-          <Route path="*" element={<Navigate to="/en" replace />} />
-        </Routes>
-      </div>
-      <Footer />
-    </Router>
+              {/* Fallback */}
+              <Route path="*" element={<Navigate to="/en" replace />} />
+            </Routes>
+          </Suspense>
+        </div>
+        <Footer />
+      </Router>
+    </HelmetProvider>
   );
 }
 

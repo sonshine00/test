@@ -3,11 +3,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { questions } from '../data/questions';
 import ProgressBar from '../components/ProgressBar';
 import { useTestProgress } from '../hooks/useTestProgress';
-import { useMeta } from '../hooks/useMeta';
+import SEO from '../components/SEO';
 
 const Test = () => {
   const { lang, testId } = useParams();
   const navigate = useNavigate();
+  const texts = i18n[lang] || i18n.en;
   
   // Fetch questions for specific test
   const testQuestions = questions[testId];
@@ -18,8 +19,6 @@ const Test = () => {
   const { currentIndex, score } = progress;
   
   const [isTransitioning, setIsTransitioning] = useState(false);
-
-  useMeta(lang || 'en', 'test');
 
   const handleAnswer = (points) => {
     setIsTransitioning(true);
@@ -44,6 +43,7 @@ const Test = () => {
 
   return (
     <div className={`container test-page ${isTransitioning ? 'fade-out' : 'fade-in'}`}>
+      <SEO lang={lang} title={`${currentIndex + 1}/${currentQuestions.length} - ${texts.title}`} />
       <ProgressBar current={currentIndex + 1} total={currentQuestions.length} />
       <div className="question-card">
         <h2 className="question-text">{currentQuestion.text}</h2>

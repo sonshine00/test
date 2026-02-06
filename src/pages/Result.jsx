@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { results } from '../data/results';
+import { tests } from '../data/tests';
 import { i18n } from '../data/i18n';
 import ShareButton from '../components/ShareButton';
-import DisqusComments from '../components/DisqusComments';
-import { useMeta } from '../hooks/useMeta';
+import SEO from '../components/SEO';
 
 const Result = () => {
   const { lang, testId } = useParams();
@@ -15,12 +15,12 @@ const Result = () => {
   const score = location.state?.score ?? 0;
   
   const testResults = results[testId];
-  const resultData = testResults ? (testResults[lang] || testResults.en).find(
-    (r) => score >= r.min && score <= r.max
-  ) : null;
-
-  // SEO
-  useMeta(lang || 'en', 'result', { type: resultData?.type });
+  const resultData = useMemo(() => {
+    if (!testResults) return null;
+    return (testResults[lang] || testResults.en).find(
+      (r) => score >= r.min && score <= r.max
+    );
+  }, [testResults, lang, score]);
 
   useEffect(() => {
     if (location.state?.score === undefined) {
@@ -28,18 +28,22 @@ const Result = () => {
     }
   }, [location.state, navigate, lang, testId]);
 
+  const otherTests = useMemo(() => {
+    return Object.values(tests).filter(t => t.id !== testId);
+  }, [testId]);
+
   if (!resultData) return <div className="container">{texts.loading}</div>;
-
-  const handleOtherLang = () => {
-    navigate(`/${texts.otherLangCode}/${testId}`);
-  };
-
-  // Disqus config
-  const disqusUrl = window.location.href;
-  const disqusIdentifier = `${testId}-${resultData.type.replace(/\s+/g, '-').toLowerCase()}`;
 
   return (
     <div className="container result-page fade-in">
+      <SEO 
+        lang={lang} 
+        title={`${resultData.type} - ${tests[testId][lang]?.title || tests[testId].en.title}`}
+        description={resultData.description}
+      />
+
+      <section className="ad-slot top" aria-label="Advertisement"></section>
+
       <div className="result-header-group">
         <span className="result-label">{texts.resultTitle}</span>
         <h1 className="result-type-main">{resultData.type}</h1>
@@ -55,26 +59,33 @@ const Result = () => {
       </div>
 
       <div className="cta-section">
-        <h3>{texts.ctaTitle}</h3>
         <div className="actions">
-          <ShareButton lang={lang} resultType={resultData.type} />
+          <ShareButton lang={lang} resultType={resultData.type} testId={testId} />
           <button className="secondary-button" onClick={() => navigate(`/${lang}/${testId}`)}>
             🔄 {texts.tryAgain}
-          </button>
-          <button className="secondary-button" onClick={() => navigate(`/${lang}`)}>
-            📋 {texts.tryAnotherTest}
-          </button>
-          <button className="text-button" onClick={handleOtherLang}>
-            🌐 {texts.tryOtherLang}
           </button>
         </div>
       </div>
 
-      <DisqusComments 
-        url={disqusUrl} 
-        identifier={disqusIdentifier} 
-        title={`${resultData.type} - ${testId}`} 
-      />
+      <section className="ad-slot middle" aria-label="Advertisement"></section>
+
+      <div className="other-tests-section">
+        <h3>🚀 {texts.tryAnotherTest}</h3>
+        <div className="test-grid">
+          {otherTests.map((test) => (
+            <div 
+              key={test.id} 
+              className="test-card highlight-card clickable small-card"
+              onClick={() => navigate(`/${lang}/${test.id}`)}
+            >
+              <h3>{test[lang]?.title || test.en.title}</h3>
+              <button className="secondary-button">{texts.startTest}</button>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <section className="ad-slot bottom" aria-label="Advertisement"></section>
     </div>
   );
 };
