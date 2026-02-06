@@ -6,7 +6,6 @@ const HeaderControls = ({ theme, setTheme }) => {
   const location = useLocation();
   const navigate = useNavigate();
   
-  // Extract lang from pathname (e.g. /en/test -> en)
   const pathParts = location.pathname.split('/');
   const currentLang = pathParts[1] || 'en';
 
@@ -17,12 +16,10 @@ const HeaderControls = ({ theme, setTheme }) => {
     navigate(newPathParts.join('/'));
   };
 
-  // Don't show language toggle if we're not on a language route (though we usually are)
   const showLangToggle = ['en', 'ko'].includes(currentLang);
 
   return (
     <div className="top-controls">
-      <ThemeToggle theme={theme} setTheme={setTheme} />
       {showLangToggle && (
         <div className="language-toggle">
           <button 
@@ -39,6 +36,7 @@ const HeaderControls = ({ theme, setTheme }) => {
           </button>
         </div>
       )}
+      <ThemeToggle theme={theme} setTheme={setTheme} />
     </div>
   );
 };
